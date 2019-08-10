@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sock_Merchant
+{
+	class Program
+	{
+		static int sockMerchant(int n, int[] ar)
+		{
+			//validating
+			if (n < 1 
+				|| n > 100
+				|| ar.Length < 1
+				|| ar.Length > 100)
+				return -1;
+
+			//declare variables
+			int counter = 0;
+			HashSet<int> set = new HashSet<int>();
+
+			for (int i = 0; i < n; i++)
+			{
+				var element = ar[i];
+
+				if (set.Contains(element))
+				{
+					set.Remove(element);
+					counter++;
+				}
+				else
+				{
+					set.Add(element);
+				}
+			}
+
+			return counter;
+		}
+
+		static void Main(string[] args)
+		{
+			var n = 9;
+			int[] arr = { 10, 20, 10, 30, 20, 10, 50, 30, 40 };
+
+			int result = sockMerchant(n, arr);
+			Console.WriteLine(result);
+			Console.ReadLine();
+		}
+	}
+}
