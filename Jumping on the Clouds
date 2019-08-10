@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Jumping_on_the_Clouds
+{
+	class Program
+	{
+		static int jumpingOnClouds(int[] c)
+		{
+			var n = c.Length;
+
+			if (n < 2
+				|| n > 100
+				|| c[0] != 0
+				|| (c.Where(i => i == 0).ToArray().Count() +
+					c.Where(i => i == 1).ToArray().Count()) != c.Count()
+				)
+			{
+				return -1;
+			}
+
+			int step = 0;
+			int stepsCounter = 0;
+
+			while (step < n - 1)
+			{
+				if (c[step] == 1 && c[step + 1] == 1)
+				{
+					stepsCounter = -1;
+					break;
+				}
+				
+				if (step + 2 < n && c[step + 2] == 0)
+				{
+					step += 2;
+					stepsCounter++;
+				}
+				else
+				{
+					step++;
+					stepsCounter++;
+				}
+			}
+
+			return stepsCounter;
+		}
+
+		static void Main(string[] args)
+		{
+			int[] clouds = { 0, 1, 1, 1, 0 };
+			var steps = jumpingOnClouds(clouds);
+		}
+	}
+}
