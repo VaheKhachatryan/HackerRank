@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Counting_Valleys
+{
+	class Program
+	{
+		static int countingValleys(int n, string s)
+		{
+			if (n < 2
+				|| n > 1000000
+				|| (s.Where(item => item == char.ConvertToUtf32("U", 0)).ToList().Count
+					+ s.Where(item => item == char.ConvertToUtf32("D", 0)).ToList().Count) != s.Count()
+				)
+			{
+				return -1;
+			}
+			// declare variables
+			var heightFromSeaLevel = 0;
+			var mountainsCount = 0;
+			var valleysCount = 0;
+
+			for (int i = 0; i < n; i++)
+			{
+				if (s[i] == char.ConvertToUtf32("U", 0))
+				{
+					heightFromSeaLevel++;
+					if (heightFromSeaLevel ==0)
+					{
+						valleysCount++;
+					}
+				}
+				if (s[i] == char.ConvertToUtf32("D", 0))
+				{
+					heightFromSeaLevel--;
+					if (heightFromSeaLevel == 0)
+					{
+						mountainsCount++;
+					}
+				}
+			}
+
+			return valleysCount;
+		}
+		static void Main(string[] args)
+		{
+			var a = countingValleys(8, "UDDDUDUU");
+		}
+	}
+}
